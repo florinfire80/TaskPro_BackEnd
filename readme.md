@@ -1,16 +1,5 @@
 BackEnd for TaskPro project
 
-Repositories:
-
-Front-End:
-Github: https://github.com/resinner/TaskPro-FrontEnd-Team6
-Page: https://resinner.github.io/TaskPro-FrontEnd-Team6/
-
-Back-End:
-Github: https://github.com/AscariA10/TaskPro_API
-Page: https://taskproapi-ukbi.onrender.com
-Routes: https://taskproapi-ukbi.onrender.com/api-docs/#/
-
 Description:
 It's final, course team project. Our tasks were build WEB-app from scratch.
 
