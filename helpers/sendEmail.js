@@ -10,17 +10,20 @@ const nodemailerConfig = {
     user: EMAIL_USERNAME,
     pass: EMAIL_PASSWORD,
   },
-  tls: {
-    ciphers: "SSLv3",
-  },
 };
 
 const transport = nodemailer.createTransport(nodemailerConfig);
 
 async function sendEmail(data) {
   const email = { ...data, from: EMAIL_USERNAME };
-  await transport.sendMail(email);
-  return true;
+  try {
+    await transport.sendMail(email);
+    console.log("Email sent successfully");
+    return true;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return false;
+  }
 }
 
 module.exports = sendEmail;

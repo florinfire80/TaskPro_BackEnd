@@ -39,7 +39,7 @@ async function register(req, res) {
     to: email,
     subject: "Registration Confirmation",
     text: `Welcome to our site! Please confirm your registration by clicking the following link: ${confirmationLink}`,
-    html: `<p>Welcome to our site! Please <a href="${confirmationLink}">confirm your registration</a>.</p>`,
+    html: `<p>Welcome to our site! Please confirm your registration by clicking the following link: <a href="${confirmationLink}">${confirmationLink}</a>.</p>`,
   };
 
   // Send the email
@@ -56,25 +56,6 @@ async function register(req, res) {
     res.status(500).json({ message: "Failed to send confirmation email" });
   }
 }
-
-const confirmEmail = async (token) => {
-  // Încercăm să găsim utilizatorul pe baza tokenului primit
-  const user = await User.findOne({ confirmationToken: token });
-
-  // Dacă nu găsim niciun utilizator cu acest token, aruncăm o eroare
-  if (!user) {
-    throw new Error("User not found or token is invalid.");
-  }
-
-  // Actualizăm utilizatorul ca fiind confirmat și eliminăm tokenul de confirmare
-  user.emailConfirmed = true;
-  user.confirmationToken = null; // Setăm tokenul la null pentru a preveni reutilizarea acestuia
-
-  // Salvăm modificările făcute asupra utilizatorului
-  await user.save();
-
-  return user;
-};
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -227,5 +208,5 @@ module.exports = {
   getHelpEmail: controllerWrapper(getHelpEmail),
   refresh: controllerWrapper(refresh),
   generateToken,
-  confirmEmail,
+  // confirmEmail,
 };
